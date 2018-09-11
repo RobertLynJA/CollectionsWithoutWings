@@ -28,7 +28,6 @@ namespace CollectionsWithoutWiings.Tests.Sorting
                 testList.InsertionSort();
 
                 Assert.Equal(expectedList, testList);
-                ;
             }
         }
 
@@ -43,8 +42,7 @@ namespace CollectionsWithoutWiings.Tests.Sorting
                 var testList = new List<int>(lst);
                 testList.InsertionSort(new Data.IntComparer());
 
-                Assert.Equal(expectedList, testList);
-                ;
+                Assert.Equal(expectedList, testList);                
             }
         }
     }
