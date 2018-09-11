@@ -28,7 +28,7 @@ namespace CollectionsWithoutWiings.Tests.Sorting
                 testList.BubbleSort();
 
                 Assert.Equal(expectedList, testList);
-;            }
+            }
         }
 
         [Fact]
@@ -43,7 +43,6 @@ namespace CollectionsWithoutWiings.Tests.Sorting
                 testList.BubbleSort(new Data.IntComparer());
 
                 Assert.Equal(expectedList, testList);
-                ;
             }
         }
     }
