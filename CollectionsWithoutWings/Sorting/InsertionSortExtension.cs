@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace CollectionsWithoutWings.Sorting
 {
-    public static class BubbleSortExtension
+    public static class InsertionSortExtension
     {
-        public static void BubbleSort<T>(this IList<T> list) where T : IComparable<T>
+        public static void InsertionSort<T>(this IList<T> list) where T : IComparable<T>
         {
-            BubbleSortHelper(list, null);
+            InsertionSortHelper(list, null);
         }
 
-        public static void BubbleSort<T>(this IList<T> list, IComparer<T> comparer)
+        public static void InsertionSort<T>(this IList<T> list, IComparer<T> comparer)
         {
             if (comparer == null)
                 throw new ArgumentNullException(nameof(comparer));
 
-            BubbleSortHelper(list, comparer);
+            InsertionSortHelper(list, comparer);
         }
 
-        private static void BubbleSortHelper<T>(this IList<T> list, IComparer<T> comparer)
-        {            
+        private static void InsertionSortHelper<T>(this IList<T> list, IComparer<T> comparer)
+        {
             Func<T, T, int> compareFunction;
 
             if (comparer == null)
@@ -31,21 +32,21 @@ namespace CollectionsWithoutWings.Sorting
                 compareFunction = (x, y) => comparer.Compare(x, y);
             }
 
-            var n = list.Count;
-            var swapped = true;
+            var i = 1;
 
-            while (swapped)
+            while (i < list.Count)
             {
-                swapped = false;
+                var x = list[i];
+                var j = i - 1;
 
-                for (var i = 1; i < n; i++)
+                while (j >= 0 && compareFunction(list[j], x) == 1)
                 {
-                    if (compareFunction(list[i - 1], list[i]) == 1) 
-                    {
-                        Swap(list, i - 1, i);
-                        swapped = true;
-                    }
+                    list[j + 1] = list[j];
+                    j = j - 1;
                 }
+
+                list[j + 1] = x;
+                i = i + 1;
             }
         }
 
