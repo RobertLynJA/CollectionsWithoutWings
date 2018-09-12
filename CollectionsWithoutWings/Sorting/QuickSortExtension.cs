@@ -47,7 +47,7 @@ namespace CollectionsWithoutWings.Sorting
 
         private static int PartitionHelper<T>(IList<T> list, int low, int high, Func<T, T, int> compareFunction)
         {
-            var pivot = list[low];
+            var pivot = ChoosePivot(list, low, high, compareFunction);
             var i = low - 1;
             var j = high + 1;
 
@@ -70,6 +70,26 @@ namespace CollectionsWithoutWings.Sorting
 
                 Swap(list, i, j);
             }
+        }
+
+        private static T ChoosePivot<T>(IList<T> list, int low, int high, Func<T, T, int> compareFunction)
+        {
+            var mid = (low + high) / 2;
+
+            if (compareFunction(list[mid], list[low]) < 0)
+            {
+                Swap(list, low, mid);
+            }
+            if (compareFunction(list[high], list[low]) < 0)
+            {
+                Swap(list, low, high);
+            }
+            if (compareFunction(list[mid], list[high]) < 0)
+            {
+                Swap(list, mid, high);
+            }
+
+            return list[high];
         }
 
         private static void Swap<T>(IList<T> list, int v, int i)
